@@ -1,0 +1,77 @@
+{% extends 'main/base.html' %}
+
+{% block title_block %}
+    <title>Site admin: Upload Reports</title>
+
+{% endblock %}
+
+{% block body_block %}
+    <style>
+        {#input{#}
+        {#    outline: none;#}
+        {#    border: 1px solid grey;#}
+        {#    padding-left: 10px;#}
+        {#    width: 100%;#}
+        {#    display: block;#}
+        {#    height: 30px;#}
+        {#}#}
+        {#input:focus{#}
+        {#    border: 1px solid black;#}
+        {#}#}
+        form{
+            max-width: 360px;
+			padding: 25px;
+			margin: 0 auto;
+            margin-top: 20px;
+			background-color: white;
+			border: 1px solid black;
+            overflow: auto;
+		}
+        form>button{
+            margin-top: 15px;
+            background-color: black;
+            color: white;
+            outline: none;
+            border: none;
+            width: 100%;
+            height: 30px;
+            font-size: medium;
+        }
+        form>button:hover{
+            cursor: pointer;
+
+        }
+        form>input{
+            display: block;
+        }
+        form>label{
+            display: block;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+
+        form>button{
+            width: 100%;
+            background-color: black;
+            color: white;
+            height: 30px;
+            outline: none;
+            box-shadow: none;
+            border: none;
+        }
+        form>button:hover{
+            cursor: pointer;
+        }
+    </style>
+    <div id="main" class="container">
+        <h1 id="brand_name" class="center">Pushp Lata STC LeaderBoard</h1>
+
+        <h2 class="center">Upload Quiz Reports</h2>
+
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_table }}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+{% endblock %}

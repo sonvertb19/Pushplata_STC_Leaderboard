@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="mobile-web-app-capable" content="yes">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        *{
+            box-sizing: border-box;
+        }
+        html, body{
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            background-color: white;
+        }
+        .data{
+            height: 100%;
+            {#background-color: white;#}
+            position: relative;
+        }
+        #footer{
+            margin-top: 50px;
+            background-color: #d9d9d9;
+            {#width: 100%;#}
+            padding-top: 20px;
+            padding-bottom: 20px;
+        }
+        #footer>a{
+            display: inline-block;
+        }
+    </style>
+
+    <style>
+        h1, h2, h3, h4, h5{
+            margin: 0;
+            padding-top: 20px;
+            font-weight: normal;
+        }
+        h1{
+            font-size: 32px;
+        }
+        .container {
+            padding-top: 0;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .center_container{
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .center {
+            text-align: center;
+        }
+        .footer_links{
+            list-style: none;
+            padding: 0;
+        }
+        @media all and (max-width: 576px){
+            .container {
+                width: 90%;
+                padding: 0;
+                margin: 0 auto;
+            }
+        }
+        @media all and (max-width: 285px){
+            .container {
+                width: 100%;
+                padding: 0;
+            }
+        }
+    </style>
+    {% block title_block %}
+    {% endblock %}
+</head>
+<body>
+    <div class="data">
+        {% block body_block %}
+        {% endblock %}
+        <div>
+        </div>
+        <div id="footer">
+            <div class="container">
+                <ul class="footer_links">
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'site_admin_login' %}">Admin Login</a></li>
+                    <li><a href="https://sciencebypushplata.gnomio.com">Course Website</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'site_admin_logout' %}">Logout</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

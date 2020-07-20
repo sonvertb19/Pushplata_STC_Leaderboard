@@ -1,0 +1,126 @@
+{% extends 'main/base.html' %}
+
+{% block title_block %}
+    <title>Pushp Lata STC LeaderBoard</title>
+{% endblock %}
+
+
+{% block body_block %}
+    <style>
+        .container {
+            padding-top: 0;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        .center_container{
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        .center {
+            text-align: center;
+        }
+
+        @media all and (max-width: 576px){
+            .container {
+                width: 90%;
+                padding: 0;
+                margin: 0 auto;
+            }
+        }
+        @media all and (max-width: 285px){
+            .container {
+                width: 100%;
+                padding: 0;
+            }
+        }
+    </style>
+    <style>
+        #top_ten_heading{
+            margin-bottom: 5px;
+        }
+        #leaderboard, #quiz_list{
+            list-style: none;
+            padding: 0;
+        }
+        #leaderboard>li, #quiz_list>li{
+            padding: 10px;
+            {#background-color: antiquewhite;#}
+            border-bottom: 1px solid #e78a8a;
+            margin-bottom: 5px;
+            font-size: large;
+            text-decoration: none7 ;
+        }
+        #quiz_wise_lb{
+            width: 100%;
+            box-sizing: border-box;
+        }
+        #quiz_list_heading{
+            margin-top: 0;
+            margin-bottom: 0;
+            text-align: center;
+            flex: 1;
+        }
+        #quiz_list{
+            margin-top: 40px;
+            margin-bottom: 40px;
+            display: none;
+        }
+        #quiz_list>li:hover{
+            {#cursor: pointer;#}
+            color: blue;
+            text-decoration: underline;
+        }
+        .toggle_button{
+            color: blue;
+        }
+        .toggle_button:hover{
+            color: darkblue;
+            cursor: pointer;
+        }
+    </style>
+    <div id="main" class="container">
+        <h1 id="brand_name" class="center">Pushp Lata STC LeaderBoard</h1>
+
+        <h2 id="top_ten_heading" class="center toggle_button">Top Performers <span id="tth_helper"></span></h2>
+        <ul id="leaderboard" class="center_container">
+            {% for performer in performers %}
+                <li> {{ forloop.counter }}. {{ performer }}</li>
+            {% empty %}
+                <h3 class="center">No Quizzes Yet!</h3>
+            {% endfor %}
+        </ul>
+
+        <h2 id="quiz_list_heading" class="toggle_button">Quiz Wise LeaderBoards <span id="qlh_helper">(Open)</span></h2>
+        <ul id="quiz_list" class="center_container">
+
+            {% for quiz in quizzes %}
+                <li><a href="quiz_leaderboard?id={{ quiz.pk }}">{{ quiz }}</a></li>
+            {% empty %}
+                <h3 class="center">No Quizzes Yet!</h3>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <script type="text/javascript">
+        const quiz_list = document.querySelector("#quiz_list");
+        const leaderboard = document.querySelector("#leaderboard");
+        const qlh_helper = document.querySelector("#qlh_helper");
+        const tth_helper = document.querySelector("#tth_helper");
+        document.querySelector("#quiz_list_heading").addEventListener("click", function () {
+            quiz_list.style.display = "block";
+            leaderboard.style.display = "none";
+            tth_helper.innerHTML = "(Open)";
+            qlh_helper.innerHTML = "";
+            document.querySelector("#main").scrollIntoView();
+        })
+        document.querySelector("#top_ten_heading").addEventListener("click", function () {
+            quiz_list.style.display = "none";
+            leaderboard.style.display = "block";
+            qlh_helper.innerHTML = "(Open)";
+            tth_helper.innerHTML = "";
+            document.querySelector("#main").scrollIntoView();
+        })
+
+    </script>
+
+{% endblock %}

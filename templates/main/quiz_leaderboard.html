@@ -1,0 +1,48 @@
+{% extends 'main/base.html' %}
+
+{% block title_block %}
+    <title>Pushp Lata STC LeaderBoard</title>
+{% endblock %}
+
+
+{% block body_block %}
+    <style>
+        #top_ten_heading{
+            margin-bottom: 5px;
+        }
+        #leaderboard{
+            list-style: none;
+            padding: 0;
+        }
+        #leaderboard>li, #quiz_list>li{
+            padding: 10px;
+            {#background-color: antiquewhite;#}
+            border-bottom: 1px solid #e78a8a;
+            margin-bottom: 5px;
+            font-size: large;
+        }
+        #quiz_list>li:hover{
+            cursor: pointer;
+            color: blue;
+            text-decoration: underline;
+        }
+        #back_to_home{
+            margin-top: 30px;
+            display: block;
+        }
+    </style>
+    <div id="main" class="container">
+        <h1 id="brand_name" class="center">Pushp Lata STC LeaderBoard</h1>
+        <h2 class="center">{{ quiz.quiz_name }}</h2>
+            <h2 id="top_ten_heading" class="center toggle_button">Top Performers <span id="tth_helper"></span></h2>
+            <ol id="leaderboard" class="center_container">
+                {% for p in top_performers %}
+                    <li> {{ forloop.counter }}. {{ p }}</li>
+                {% endfor %}
+            </ol>
+        <a id="back_to_home" class="center" href="{% url 'home' %}">Back to HomePage</a>
+    </div>
+
+
+
+{% endblock %}

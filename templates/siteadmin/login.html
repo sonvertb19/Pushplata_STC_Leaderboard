@@ -1,0 +1,84 @@
+{% extends 'main/base.html' %}
+
+{% block title_block %}
+    <title>Site admin: Login</title>
+
+{% endblock %}
+
+{% block body_block %}
+    <style>
+        form>input{
+            display: block;
+        }
+        form>label{
+            display: block;
+            margin-top: 10px;
+            font-size: 14px;
+        }
+        #error{
+			color: #ad0330;
+		}
+        input{
+            outline: none;
+            border: 1px solid grey;
+            padding-left: 10px;
+            width: 100%;
+            display: block;
+            height: 30px;
+        }
+        input:focus{
+            border: 1px solid black;
+        }
+        form{
+            max-width: 360px;
+			padding: 25px;
+			margin: 0 auto;
+            margin-top: 20px;
+			background-color: white;
+			border: 1px solid black;
+		}
+        form>button{
+            margin-top: 15px;
+            background-color: black;
+            color: white;
+            outline: none;
+            border: none;
+            width: 100%;
+            height: 30px;
+            font-size: medium;
+        }
+        form>button:hover{
+            cursor: pointer;
+
+        }
+        .info{
+            border: 1px solid green;
+            padding: 3px;
+            text-align: center;
+            background-color: rgba(158, 255, 158, 0.61);
+        }
+    </style>
+    <div id="main" class="container">
+        <h1 id="brand_name" class="center">Pushp Lata STC LeaderBoard</h1>
+        <h2 class="center">Admin Login</h2>
+
+        {% if messages.errors %}
+            {% for error in messages.errors %}
+                <p class="error">{{ error }}</p>
+            {% endfor %}
+        {% endif %}
+        <p id="error"></p>
+
+        {% if messages.info %}
+            {% for information in messages.info %}
+                <p class="info">{{ information }}</p>
+            {% endfor %}
+        {% endif %}
+
+        <form method="POST" action="">
+            {% csrf_token %}
+            {{ form.as_table }}
+            <button type="submit">Login</button>
+        </form>
+    </div>
+{% endblock %}
