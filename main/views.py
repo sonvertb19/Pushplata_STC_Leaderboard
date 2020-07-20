@@ -140,7 +140,7 @@ def handle_uploaded_file(f):
         print("csv_reports exists")
     else:
         print("csv_reports does not exists")
-        os.mkdir("csv_reports")
+        os.mkdir(report_dir_loc)
         print("Creating csv_reports directory\n")
 
     report_location = os.path.join(report_dir_loc, f.name)
