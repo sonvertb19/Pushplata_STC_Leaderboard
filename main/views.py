@@ -197,8 +197,16 @@ def handle_uploaded_file(f):
 
                 if created:
                     create_log("Info", "New Quiz Created ({})".format(quiz))
+                    #     If new quiz is created, no need to check models.marks for present entries
+                    #     corresponding to students who has already taken the quiz.
                 else:
                     create_log("Info", "Quiz Report Updated ({})".format(quiz))
+                    #   If the quiz is available already, then delete all the models.marks entries for
+                    #   that quiz.
+                    quiz_marks = Marks.objects.filter(quiz=quiz)
+                    print("Number of Already Existing Marks: {}".format(len(quiz_marks)))
+                    print("Delete all the existing {} marks records.".format(len(quiz_marks)))
+                    quiz_marks.delete()
 
             # Quiz Created/Fetched
             else:
